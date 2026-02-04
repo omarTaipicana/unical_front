@@ -29,21 +29,22 @@ import InstitutoProtectedRoute from "./routes/InstitutoProtectedRoute";
 import SuperAdminProtectedRoute from "./routes/SuperAdminProtectedRoute";
 import UserEdit from "./pages/UserEdit";
 import { useEffect } from "react";
+import Cimcsce from "./components/Cursos/Cimcsce";
 
 const App = () => {
   const location = useLocation();
   const showHeader = location.pathname !== "/";
 
   // main.jsx o App.jsx (una sola vez)
-useEffect (() => {
-  window.__RN_LOGOUT__ = () => {
-    try {
-      window.ReactNativeWebView?.postMessage(
-        JSON.stringify({ type: "LOGOUT" })
-      );
-    } catch {}
-  };
-}, []);
+  useEffect(() => {
+    window.__RN_LOGOUT__ = () => {
+      try {
+        window.ReactNativeWebView?.postMessage(
+          JSON.stringify({ type: "LOGOUT" })
+        );
+      } catch { }
+    };
+  }, []);
 
 
   return (
@@ -65,6 +66,8 @@ useEffect (() => {
 
         <Route path="/giscopensc" element={<Giscopnsc />} />
         <Route path="/ciccenic" element={<Ciccenic />} />
+        <Route path="/cimcsce" element={<Cimcsce/>  } />
+
         <Route path="/accv" element={<Accv />} />
         <Route path="/login" element={<Login />} />
 
@@ -92,7 +95,7 @@ useEffect (() => {
           </Route>
         </Route>
       </Routes>
-      <Footer />
+      {/* <Footer /> */}
       <Alert />
     </div>
   );

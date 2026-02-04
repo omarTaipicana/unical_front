@@ -350,7 +350,7 @@ const LandingPage = () => {
               </article>
             </Link>
 
-            <Link to="/accv">
+            <Link to="/cimcsce">
               <article className="curso-item">
                 <img
                   src="/accv.png"

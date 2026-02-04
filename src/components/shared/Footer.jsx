@@ -7,7 +7,7 @@ const Footer = () => {
     <div>
       <section>
         <ul className="ul_footer">
-          <li className="li_footer">
+          {/* <li className="li_footer">
             <a href="tel:+593980773229" className="link_footer">
               <img
                 className="img_footer"
@@ -99,7 +99,7 @@ const Footer = () => {
             <span className="span_footer">Copyright</span>
             <img className="img_footer_c" src="../../../copyright.png" alt="" />
             <span className="span_footer">Eduka Corporación Educativa</span>
-          </li>
+          </li> */}
         </ul>
       </section>
     </div>

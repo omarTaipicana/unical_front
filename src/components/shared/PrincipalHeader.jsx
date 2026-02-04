@@ -299,7 +299,7 @@ const PrincipalHeader = () => {
       {/* TOPBAR BLANCA */}
       <div className="topbar">
         <div className="topbar-left">
-          <a
+          {/* <a
             href="https://www.google.com/maps?q=-0.200737103819847,-78.4886245727539"
             target="_blank"
             rel="noopener noreferrer"
@@ -318,7 +318,7 @@ const PrincipalHeader = () => {
               <FaWhatsapp />
               +593 980 773 229
             </span>
-          </a>
+          </a> */}
         </div>
 
         <div className="topbar-right">
