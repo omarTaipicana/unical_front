@@ -2,121 +2,132 @@ import React, { useState, useRef, useEffect } from "react";
 import { Document, Page, pdfjs } from "react-pdf";
 import "react-pdf/dist/Page/AnnotationLayer.css";
 import "react-pdf/dist/Page/TextLayer.css";
-import { Link, } from "react-router-dom";
+import { Link } from "react-router-dom";
 import "./Styles/Ciccenic.css";
 import IsLoading from "../shared/isLoading";
 
 pdfjs.GlobalWorkerOptions.workerSrc = `../../../files/pdf.worker.min.js`;
 
 const Cimcsce = () => {
-    const urlRegister = `${location.protocol}//${location.host}/#/register_discente/cimcsce`;
-    const urlPago = `${location.protocol}//${location.host}/#/register_pago/cimcsce`;
+  const urlRegister = `${location.protocol}//${location.host}/#/register_discente/cimcsce`;
+  const urlPago = `${location.protocol}//${location.host}/#/register_pago/cimcsce`;
 
+  const [numPages, setNumPages] = useState(null);
+  const [pageNumber, setPageNumber] = useState(1);
+  const [loadingPdf, setLoadingPdf] = useState(true); // Nuevo estado
 
-    const [numPages, setNumPages] = useState(null);
-    const [pageNumber, setPageNumber] = useState(1);
-    const [loadingPdf, setLoadingPdf] = useState(true); // Nuevo estado
+  const containerRef = useRef(null);
+  const [pdfWidth, setPdfWidth] = useState(740);
 
-    const containerRef = useRef(null);
-    const [pdfWidth, setPdfWidth] = useState(740);
-
-    useEffect(() => {
-        function updateWidth() {
-            if (containerRef.current) {
-                setPdfWidth(containerRef.current.offsetWidth - 35);
-            }
-        }
-        updateWidth();
-        window.addEventListener("resize", updateWidth);
-        return () => window.removeEventListener("resize", updateWidth);
-    }, []);
-
-    function onDocumentLoadSuccess({ numPages }) {
-        setNumPages(numPages);
-        setPageNumber(1);
-        setLoadingPdf(false); // PDF cargado
+  useEffect(() => {
+    function updateWidth() {
+      if (containerRef.current) {
+        setPdfWidth(containerRef.current.offsetWidth - 35);
+      }
     }
+    updateWidth();
+    window.addEventListener("resize", updateWidth);
+    return () => window.removeEventListener("resize", updateWidth);
+  }, []);
 
-    function goToPrevPage() {
-        setPageNumber((prev) => (prev <= 1 ? 1 : prev - 1));
-    }
+  function onDocumentLoadSuccess({ numPages }) {
+    setNumPages(numPages);
+    setPageNumber(1);
+    setLoadingPdf(false); // PDF cargado
+  }
 
-    function goToNextPage() {
-        setPageNumber((prev) => (prev >= numPages ? numPages : prev + 1));
-    }
+  function goToPrevPage() {
+    setPageNumber((prev) => (prev <= 1 ? 1 : prev - 1));
+  }
 
-    return (
-        <div className="ciccenic_page">
-            {loadingPdf && <IsLoading />}
+  function goToNextPage() {
+    setPageNumber((prev) => (prev >= numPages ? numPages : prev + 1));
+  }
 
-            {/* ====== SECCIÓN SUPERIOR: PDF + TEXTO ====== */}
-            <div className="ciccenic_header">
-                {/* PDF A LA IZQUIERDA */}
-                <div className="ciccenic_pdf_container" ref={containerRef}>
-                    <Document
-                        file="/files/cimcsce_c.pdf"
-                        onLoadSuccess={onDocumentLoadSuccess}
-                        loading="Cargando PDF..."
-                    >
-                        <Page
-                            pageNumber={pageNumber}
-                            width={pdfWidth}
-                            className="cimcsce_pdf"
-                        />
-                    </Document>
+  return (
+    <div className="ciccenic_page">
+      {loadingPdf && <IsLoading />}
 
-                    {/* Controles debajo del PDF */}
-                    <div className="pagination_controls">
-                        <button onClick={goToPrevPage} disabled={pageNumber <= 1}>
-                            Anterior
-                        </button>
+      {/* ====== SECCIÓN SUPERIOR: PDF + TEXTO ====== */}
+      <div className="ciccenic_header">
+        {/* PDF A LA IZQUIERDA */}
+        <div className="ciccenic_pdf_container" ref={containerRef}>
+          <Document
+            file="/files/cimcsce_c.pdf"
+            onLoadSuccess={onDocumentLoadSuccess}
+            loading="Cargando PDF..."
+          >
+            <Page
+              pageNumber={pageNumber}
+              width={pdfWidth}
+              className="cimcsce_pdf"
+            />
+          </Document>
 
-                        <span>
-                            Página {pageNumber} de {numPages || "--"}
-                        </span>
+          {/* Controles debajo del PDF */}
+          <div className="pagination_controls">
+            <button onClick={goToPrevPage} disabled={pageNumber <= 1}>
+              Anterior
+            </button>
 
-                        <button onClick={goToNextPage} disabled={pageNumber >= numPages}>
-                            Siguiente
-                        </button>
-                    </div>
-                </div>
+            <span>
+              Página {pageNumber} de {numPages || "--"}
+            </span>
 
-                {/* INFORMACIÓN A LA DERECHA */}
-                <div className="ciccenic_info">
-                    <img src="/ciccenic.png" alt="ícono CICENIC" className="ciccenic_icon" />
-
-                    <h3 className="ciccenic_title">
-                        Curso Internacional en Operaciones Psicológicas y Confiabilidad en Técnicas de Entrevista.
-                    </h3>
-
-                    <p className="ciccenic_description">
-                        Objetivo: Formar líderes capaces de resolver incidentes críticos con negociación táctica y comunicación estratégica,minimizando la fuerza y garantizando la seguridad y los derechos humanos.
-
-                    </p>
-                    {/* ====== BOTONES INFERIORES ====== */}
-                    <div className="button_group">
-                        <a href={urlRegister} rel="noopener noreferrer" className="btn_primary">
-                            Inscribirse ➜
-                        </a>
-
-                        <a href={urlPago} rel="noopener noreferrer" className="btn_primary">
-                            Registrar pago ➜
-                        </a>
-
-                        <a
-                            href="/files/ciccenic_c.pdf"
-                            download="Brochure-Ciccenic.pdf"
-                            className="btn_primary"
-                        >
-                            Descargar PDF ➜
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-
+            <button onClick={goToNextPage} disabled={pageNumber >= numPages}>
+              Siguiente
+            </button>
+          </div>
         </div>
-    );
-}
 
-export default Cimcsce
+        {/* INFORMACIÓN A LA DERECHA */}
+        <div className="ciccenic_info">
+          {/* <img
+            src="/ciccenic.png"
+            alt="ícono CICENIC"
+            className="ciccenic_icon"
+          /> */}
+
+          <h3 className="ciccenic_title">
+            Curso Internacional de Manejo de Conflictos Sociales y Crisis
+            Emocionales{" "}
+          </h3>
+
+          <p className="ciccenic_description">
+            Objetivo: Desarrollar competencias integrales en la identificación,
+            manejo y resolución de conflictos sociales y crisis emocionales,
+            mediante la aplicación de estrategias de negociación, comunicación
+            asertiva, desescalada verbal y protocolos de primeros auxilios
+            psicológicos, con el fin de garantizar intervenciones profesionales
+            éticas y efectivas que prevengan la violencia, mitiguen el impacto
+            emocional y promuevan la convivencia pacífica en diversos entornos.
+          </p>
+          {/* ====== BOTONES INFERIORES ====== */}
+          <div className="button_group">
+            <a
+              href={urlRegister}
+              rel="noopener noreferrer"
+              className="btn_primary"
+            >
+              Inscribirse ➜
+            </a>
+
+            <a href={urlPago} rel="noopener noreferrer" className="btn_primary">
+              Registrar pago ➜
+            </a>
+
+            <a
+              href="/files/ciccenic_c.pdf"
+              download="Brochure-Ciccenic.pdf"
+              className="btn_primary"
+            >
+              Descargar PDF ➜
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default Cimcsce;

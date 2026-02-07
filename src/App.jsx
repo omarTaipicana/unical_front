@@ -30,6 +30,7 @@ import SuperAdminProtectedRoute from "./routes/SuperAdminProtectedRoute";
 import UserEdit from "./pages/UserEdit";
 import { useEffect } from "react";
 import Cimcsce from "./components/Cursos/Cimcsce";
+import { Navigate } from "react-router-dom";
 
 const App = () => {
   const location = useLocation();
@@ -40,20 +41,29 @@ const App = () => {
     window.__RN_LOGOUT__ = () => {
       try {
         window.ReactNativeWebView?.postMessage(
-          JSON.stringify({ type: "LOGOUT" })
+          JSON.stringify({ type: "LOGOUT" }),
         );
-      } catch { }
+      } catch {}
     };
   }, []);
-
 
   return (
     <div>
       {location.pathname !== "/" && <PrincipalHeader />}
+
+      <Routes>
+        <Route path="/register_discente/:code" element={<RegistroAlumnos />} />
+        <Route path="/register_pago/:code" element={<RegistroPagos />} />
+        <Route path="/cimcsce" element={<Cimcsce />} />
+
+        <Route path="*" element={<Navigate to="/cimcsce" replace />} />
+      </Routes>
+
+      {/* {location.pathname !== "/" && <PrincipalHeader />}
       <main
         className={showHeader ? "app-main app-main--with-header" : "app-main"}
       ></main>
-      {/* <Gkm /> */}
+      <Gkm />
       <Routes>
         <Route path="/" element={<LandingPage />} />
         <Route path="/register" element={<Register />} />
@@ -95,8 +105,8 @@ const App = () => {
           </Route>
         </Route>
       </Routes>
-      {/* <Footer /> */}
-      <Alert />
+      <Footer />
+      <Alert /> */}
     </div>
   );
 };
