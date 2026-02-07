@@ -383,7 +383,7 @@ export const RegistroPagos = () => {
         <div className="pagos_right pagos_animate_right">
           <div className="pagos_panel solo_imagen">
             <img
-              src="/images/pago_accv_n.png"
+              src="/images/pago_all.png"
               alt="Información de pago"
               className="pagos_img_full"
             />
