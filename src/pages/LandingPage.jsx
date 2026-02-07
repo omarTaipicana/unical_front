@@ -171,7 +171,7 @@ const LandingPage = () => {
         </div>
 
         <img
-          src="/images/eduka_sf.png"
+          src="/images/unical_sf.png"
           alt="Logo Eduka"
           className="logo_navbar"
           onClick={() => scrollToSection(inicioRef)}
@@ -451,7 +451,7 @@ const LandingPage = () => {
           {/* Columna izquierda: logo + suscripción */}
           <div className="footer-left">
             <img
-              src="/images/eduka_sf.png"
+              src="/images/unical_sf.png"
               alt="Logo Eduka"
               className="footer-logo"
             />

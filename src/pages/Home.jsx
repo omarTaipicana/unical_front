@@ -102,7 +102,7 @@ const Home = () => {
         >
           <div className="homeMenuHeader">
             <img
-              src="/images/eduka_sf.png"
+              src="/images/unical_sf.png"
               alt="Eduka"
               className="homeMenuLogo"
             />

@@ -418,7 +418,7 @@ const seleccionarSugerencia = (sug) => {
           ref={menuRef}
         >
           <div className="secMenuHeader">
-            <img src="/images/eduka_sf.png" alt="Eduka" className="secMenuLogo" />
+            <img src="/images/unical_sf.png" alt="Eduka" className="secMenuLogo" />
             <p className="secMenuSubtitle">Panel Secretaría</p>
           </div>
 
