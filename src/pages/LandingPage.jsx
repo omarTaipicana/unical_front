@@ -333,24 +333,9 @@ const LandingPage = () => {
 
           {/* Lista de cursos */}
           <div className="cursos-grid">
-            <Link to="/giscopensc">
-              <article className="curso-item">
-                <img
-                  src="/giscopensc.png"
-                  alt="Gestión integral"
-                  className="curso-icon"
-                />
-                <h3 className="curso-name">
-                  Gestión integral de la Seguridad Ciudadana y el Orden Público
-                  con enfoque en Negociación en Situación de Crisis
-                </h3>
-                <button className="curso-cta">
-                  Conocer más <span>➜</span>
-                </button>
-              </article>
-            </Link>
+     
 
-            <Link to="/cimcsce">
+            <Link to="/cils">
               <article className="curso-item">
                 <img
                   src="/accv.png"
@@ -358,7 +343,7 @@ const LandingPage = () => {
                   className="curso-icon"
                 />
                 <h3 className="curso-name">
-                  Análisis en Conducta Criminal y Victimología
+                  Curso Internacional de Lengua de Señas
                 </h3>
                 <button className="curso-cta">
                   Conocer más <span>➜</span>
@@ -366,22 +351,7 @@ const LandingPage = () => {
               </article>
             </Link>
 
-            <Link to="/ciccenic">
-              <article className="curso-item">
-                <img
-                  src="/ciccenic.png"
-                  alt="Comando comunicacional"
-                  className="curso-icon"
-                />
-                <h3 className="curso-name">
-                  Curso Internacional en Operaciones Psicológicas y
-                  Confiabilidad en Técnicas de Entrevista.
-                </h3>
-                <button className="curso-cta">
-                  Conocer más <span>➜</span>
-                </button>
-              </article>
-            </Link>
+   
           </div>
         </div>
       </motion.section>

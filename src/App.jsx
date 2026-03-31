@@ -10,10 +10,8 @@ import Verify from "./pages/auth/Verify";
 import ResetPasswordSendEmail from "./pages/auth/ResetPasswordSendEmail";
 import ChangePassword from "./pages/auth/ChangePassword";
 import Footer from "./components/shared/Footer";
-import Giscopnsc from "./components/Cursos/Giscopnsc";
 import RegistroAlumnos from "./components/Formularios/RegistroAlumnos";
 import { RegistroPagos } from "./components/Formularios/RegistroPagos";
-import Accv from "./components/Cursos/Accv";
 import ProtectedRoutes from "./routes/ProtectedRoutes";
 import ValidadorProtectedRoute from "./routes/ValidadorProtectedRoute";
 import SubAdminProtectedRoutes from "./routes/SubAdminProtectedRoutes";
@@ -22,15 +20,13 @@ import Dashboard from "./pages/Dashboard";
 import Secretaria from "./pages/Secretaria";
 import SecretariaRoutes from "./routes/SecretariaRoutes";
 
-import Gkm from "./components/shared/Gkm";
-import Ciccenic from "./components/Cursos/Ciccenic";
 import Instituto from "./pages/Instituto";
 import InstitutoProtectedRoute from "./routes/InstitutoProtectedRoute";
 import SuperAdminProtectedRoute from "./routes/SuperAdminProtectedRoute";
 import UserEdit from "./pages/UserEdit";
 import { useEffect } from "react";
-import Cimcsce from "./components/Cursos/Cimcsce";
 import { Navigate } from "react-router-dom";
+import Cils from "./components/Cursos/Cils";
 
 const App = () => {
   const location = useLocation();
@@ -50,20 +46,18 @@ const App = () => {
   return (
     <div>
       {location.pathname !== "/" && <PrincipalHeader />}
+      <main
+        className={showHeader ? "app-main app-main--with-header" : "app-main"}
+      ></main>
 
-      <Routes>
+      {/* <Routes>
         <Route path="/register_discente/:code" element={<RegistroAlumnos />} />
         <Route path="/register_pago/:code" element={<RegistroPagos />} />
         <Route path="/cimcsce" element={<Cimcsce />} />
 
         <Route path="*" element={<Navigate to="/cimcsce" replace />} />
-      </Routes>
+      </Routes> */}
 
-      {/* {location.pathname !== "/" && <PrincipalHeader />}
-      <main
-        className={showHeader ? "app-main app-main--with-header" : "app-main"}
-      ></main>
-      <Gkm />
       <Routes>
         <Route path="/" element={<LandingPage />} />
         <Route path="/register" element={<Register />} />
@@ -74,11 +68,7 @@ const App = () => {
         <Route path="/register_discente/:code" element={<RegistroAlumnos />} />
         <Route path="/register_pago/:code" element={<RegistroPagos />} />
 
-        <Route path="/giscopensc" element={<Giscopnsc />} />
-        <Route path="/ciccenic" element={<Ciccenic />} />
-        <Route path="/cimcsce" element={<Cimcsce/>  } />
-
-        <Route path="/accv" element={<Accv />} />
+        <Route path="/cils" element={<Cils />} />
         <Route path="/login" element={<Login />} />
 
         <Route element={<ProtectedRoutes />}>
@@ -106,7 +96,7 @@ const App = () => {
         </Route>
       </Routes>
       <Footer />
-      <Alert /> */}
+      <Alert />
     </div>
   );
 };
