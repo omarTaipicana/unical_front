@@ -54,7 +54,7 @@ const Cils = () => {
                 {/* PDF A LA IZQUIERDA */}
                 <div className="ciccenic_pdf_container" ref={containerRef}>
                     <Document
-                        file="/files/ciccenic_c.pdf"
+                        file="/files/cils_c.pdf"
                         onLoadSuccess={onDocumentLoadSuccess}
                         loading="Cargando PDF..."
                     >
@@ -82,15 +82,15 @@ const Cils = () => {
                 </div>
 
                 {/* INFORMACIÓN A LA DERECHA */}
-                <div className="ciccenic_info">
-                    <img src="/ciccenic.png" alt="ícono CICENIC" className="ciccenic_icon" />
+                <div className="cils_info">
+                    <img src="/cils.png" alt="ícono CICENIC" className="ciccenic_icon" />
 
                     <h3 className="ciccenic_title">
-                        Curso Internacional en Operaciones Psicológicas y Confiabilidad en Técnicas de Entrevista.
+                        Curso Internacional de LENGUA DE SEÑAS.
                     </h3>
 
                     <p className="ciccenic_description">
-                        Objetivo: Formar líderes capaces de resolver incidentes críticos con negociación táctica y comunicación estratégica,minimizando la fuerza y garantizando la seguridad y los derechos humanos.
+                        Objetivo: Desarrollar habilidades comunicativas en Lengua de Señas, capacitando a los participantes para interactuar de manera efectiva con la comunidad sorda y promoviendo la inclusión social.
 
                     </p>
                     {/* ====== BOTONES INFERIORES ====== */}
@@ -104,7 +104,7 @@ const Cils = () => {
                         </a>
 
                         <a
-                            href="/files/ciccenic_c.pdf"
+                            href="/files/cils_c.pdf"
                             download="Brochure-Ciccenic.pdf"
                             className="btn_primary"
                         >

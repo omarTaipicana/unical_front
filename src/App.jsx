@@ -59,7 +59,7 @@ const App = () => {
       </Routes> */}
 
       <Routes>
-        <Route path="/" element={<LandingPage />} />
+        {/* <Route path="/" element={<LandingPage />} /> */}
         <Route path="/register" element={<Register />} />
         <Route path="/verify/:code" element={<Verify />} />
         <Route path="/reset_password" element={<ResetPasswordSendEmail />} />
@@ -95,7 +95,7 @@ const App = () => {
           </Route>
         </Route>
       </Routes>
-      <Footer />
+      {/* <Footer /> */}
       <Alert />
     </div>
   );

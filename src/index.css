@@ -68,10 +68,10 @@ button {
 }
 
 /* cuando hay PrincipalHeader fixed */
-.app-main--with-header {
-  /* topbar (5em) + navbar (5rem) */
+/* .app-main--with-header {
+
   padding-top: calc(3.5em + 3.5rem);
-}
+} */
 
 
 

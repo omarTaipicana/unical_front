@@ -88,7 +88,7 @@ export const RegistroPagos = () => {
         dispatch(
           showAlert({
             message: newValidate?.message,
-            alertType: 1,
+            alertType: 2,
           })
         );
       }
@@ -284,7 +284,7 @@ export const RegistroPagos = () => {
                     <strong>Cédula:</strong> {usuario.cI}
                   </p>
 
-                  <div className="pagos_box_1">
+                  {/* <div className="pagos_box_1">
                     <label className="pagos_check_row">
                       <span>Servidor Policial</span>
                       <input
@@ -309,7 +309,7 @@ export const RegistroPagos = () => {
                         }}
                       />
                     </label>
-                  </div>
+                  </div> */}
                 </div>
                 <div className="pagos_box">
                   <label className="pagos_check_row">
@@ -335,7 +335,7 @@ export const RegistroPagos = () => {
                   <span>Valor depositado:</span>
                   <input
                     type="number"
-                    step="1"
+                    step="0.01"
                     min="0"
                     {...register("valorDepositado", {
                       required: "Debes ingresar el valor depositado.",
