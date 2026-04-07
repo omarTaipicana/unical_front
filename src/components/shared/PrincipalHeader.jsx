@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import "./styles/PrincipalHeader.css";
 import { useDispatch } from "react-redux";
 import { showAlert } from "../../store/states/alert.slice";
@@ -11,6 +11,7 @@ const PrincipalHeader = () => {
   const superAdmin = import.meta.env.VITE_CI_SUPERADMIN;
 
   const token = localStorage.getItem("token");
+  const location = useLocation();
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -26,6 +27,12 @@ const PrincipalHeader = () => {
     grado6: false,
     grado7: false,
   });
+
+  const onlyLogoRoutes = ["/register_discente", "/register_pago"];
+
+  const showOnlyLogo = onlyLogoRoutes.some((route) =>
+    location.pathname.startsWith(route)
+  );
 
   // Configurar grados según CI o rol
   useEffect(() => {
@@ -84,7 +91,7 @@ const PrincipalHeader = () => {
     }
     localStorage.removeItem("token");
     setUserLogged();
-    navigate("/");
+    navigate("/login");
   };
 
   const toggleMenu = () => setMenuOpen((prev) => !prev);
@@ -182,76 +189,76 @@ const PrincipalHeader = () => {
   const renderAuthDesktop = (onClick) => {
     if (!token) return null;
 
-    if (grados.grado1) {
-      return (
-        <>
-          <Link to="/dashboard" onClick={onClick}>
-            Dashboard
-          </Link>
-          <Link to="/validacion" onClick={onClick}>
-            Validacion
-          </Link>
-          <Link to="/edit_user" onClick={onClick}>
-            Editar Usuario
-          </Link>
-        </>
-      );
-    }
+    return (
+      <>
+        {grados.grado1 && (
+          <>
+            <Link to="/dashboard" onClick={onClick}>
+              Dashboard
+            </Link>
+            <Link to="/validacion" onClick={onClick}>
+              Validacion
+            </Link>
+            <Link to="/edit_user" onClick={onClick}>
+              Editar Usuario
+            </Link>
+          </>
+        )}
 
-    if (grados.grado2) {
-      return (
-        <>
-          <Link to="/dashboard" onClick={onClick}>
-            Dashboard
-          </Link>
-          <Link to="/validacion" onClick={onClick}>
-            Validacion
-          </Link>
-        </>
-      );
-    }
+        {grados.grado2 && (
+          <>
+            <Link to="/dashboard" onClick={onClick}>
+              Dashboard
+            </Link>
+            <Link to="/validacion" onClick={onClick}>
+              Validacion
+            </Link>
+          </>
+        )}
 
-    if (grados.grado3) {
-      return (
-        <>
+        {grados.grado3 && (
           <Link to="/secre" onClick={onClick}>
             Secretaria
           </Link>
-        </>
-      );
-    }
+        )}
 
-    if (grados.grado4) {
-      return (
-        <>
+        {grados.grado4 && (
           <Link to="/validacion" onClick={onClick}>
             Validacion
           </Link>
-        </>
-      );
-    }
+        )}
 
-    if (grados.grado5) {
-      return (
-        <>
+        {grados.grado5 && (
           <Link to="/secre" onClick={onClick}>
             Secretaria
           </Link>
-        </>
-      );
-    }
+        )}
 
-    if (grados.grado6) {
-      return (
-        <>
+        {grados.grado6 && (
           <Link to="/instituto" onClick={onClick}>
             Instituto
           </Link>
-        </>
-      );
-    }
+        )}
 
-    return null;
+        {/* perfil */}
+        <Link to="/login" onClick={closeMenu}>
+          <img
+            className="user__icon"
+            src="../../../user.png"
+            alt="User Icon"
+          />
+        </Link>
+
+        {/* logout desktop */}
+        <button
+          onClick={handleLogout}
+          className="logout__button"
+          type="button"
+        >
+          Salir
+        </button>
+      </>
+    );
   };
 
   /** AUTH EN MOBILE MENU */
@@ -275,135 +282,62 @@ const PrincipalHeader = () => {
         {/* mismos links que desktop (derecha) */}
         {renderAuthDesktop(closeMenu)}
 
-        {/* opcional: tu perfil (lo dejas como estaba) */}
-        <Link to="/login" onClick={closeMenu}>
-          <span>Mi perfil</span>
-        </Link>
 
-        {/* logout igual */}
-        <button
-          onClick={() => {
-            handleLogout();
-            closeMenu();
-          }}
-          className="logout__button"
-        >
-          Salir
-        </button>
       </>
     );
   };
 
   return (
     <header className="header_nav">
-      {/* TOPBAR BLANCA */}
-      {/* <div className="topbar">
-        <div className="topbar-left">
-          <a
-            href="https://www.google.com/maps?q=-0.200737103819847,-78.4886245727539"
-            target="_blank"
-            rel="noopener noreferrer"
+      {showOnlyLogo ? (
+        <nav className={`navbar ${showOnlyLogo ? "navbar--only-logo" : ""}`}>
+          <Link to="/" className="logo_link">
+            <img
+              src="/images/unical_sf.png"
+              alt="Logo Eduka"
+              className="logo_navbar_ph"
+            />
+          </Link>
+        </nav>
+      ) : (
+        <>
+          <nav className="navbar">
+            <button
+              className={`menu_icon ${menuOpen ? "menu_icon--open" : ""}`}
+              onClick={toggleMenu}
+              aria-label="Toggle menu"
+            >
+              <span></span>
+              <span></span>
+              <span></span>
+            </button>
+
+            <div className="navbar_links navbar_links-left">
+              {renderRoleLinks(closeMenu)}
+            </div>
+
+            <Link to="/" onClick={closeMenu} className="logo_link">
+              <img
+                src="/images/unical_sf.png"
+                alt="Logo Eduka"
+                className="logo_navbar_ph"
+              />
+            </Link>
+
+            <div className="navbar_links navbar_links-right">
+              {renderAuthDesktop(closeMenu)}
+            </div>
+          </nav>
+
+          <div
+            className={`navbar_mobile_menu ${menuOpen ? "navbar_mobile_menu--open" : ""
+              }`}
           >
-            <span className="topbar-item">
-              <FaMapMarkerAlt />
-              Reina Victoria y Cristobal Colón / Quito - Ecuador
-            </span>
-          </a>
-          <a
-            href="https://wa.me/593980773229"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <span className="topbar-item">
-              <FaWhatsapp />
-              +593 980 773 229
-            </span>
-          </a>
-        </div>
-
-        <div className="topbar-right">
-          {!token ? (
-            <>
-              <button
-                className="topbar-link"
-                onClick={() => navigate("/register")}
-              >
-                Registrarse
-              </button>
-              <span className="topbar-separator">|</span>
-              <button
-                className="topbar-link"
-                onClick={() => navigate("/login")}
-              >
-                Ingresar
-              </button>
-            </>
-          ) : (
-            <>
-              <Link to="/login" onClick={closeMenu}>
-                <img
-                  className="user__icon"
-                  src="../../../user.png"
-                  alt="User Icon"
-                />
-              </Link>
-              <button
-                onClick={() => {
-                  handleLogout();
-                  closeMenu();
-                }}
-                className="logout__button"
-              >
-                Salir
-              </button>
-            </>
-          )}
-        </div>
-      </div> */}
-
-      {/* NAVBAR AZUL */}
-      <nav className="navbar">
-        {/* Hamburguesa (solo se ve en mobile con CSS) */}
-        <button
-          className={`menu_icon ${menuOpen ? "menu_icon--open" : ""}`}
-          onClick={toggleMenu}
-          aria-label="Toggle menu"
-        >
-          <span></span>
-          <span></span>
-          <span></span>
-        </button>
-
-        {/* LINKS IZQUIERDA (roles) */}
-        <div className="navbar_links navbar_links-left">
-          {renderRoleLinks(closeMenu)}
-        </div>
-
-        {/* LOGO CENTRADO */}
-        <Link to="/" onClick={closeMenu} className="logo_link">
-          <img
-            src="/images/unical_sf.png"
-            alt="Logo Eduka"
-            className="logo_navbar_ph"
-          />
-        </Link>
-
-        {/* AUTH DERECHA (desktop) */}
-        <div className="navbar_links navbar_links-right">
-          {renderAuthDesktop(closeMenu)}
-        </div>
-      </nav>
-
-      {/* MENÚ MOBILE DESPLEGABLE */}
-      <div
-        className={`navbar_mobile_menu ${
-          menuOpen ? "navbar_mobile_menu--open" : ""
-        }`}
-      >
-        {renderRoleLinks(closeMenu)}
-        <hr className="navbar_mobile_divider" />
-        {renderAuthMobile()}
-      </div>
+            {renderRoleLinks(closeMenu)}
+            {renderAuthMobile()}
+          </div>
+        </>
+      )}
     </header>
   );
 };

@@ -68,16 +68,16 @@ button {
 }
 
 /* cuando hay PrincipalHeader fixed */
-/* .app-main--with-header {
+.app-main--with-header {
 
-  padding-top: calc(3.5em + 3.5rem);
-} */
+  padding-top: calc(2.8em + 2.8rem);
+}
 
 
 
 /* Versión mobile: topbar más baja + navbar 3.5rem */
-@media (max-width: 768px) {
+/* @media (max-width: 768px) {
   .app-main--with-header {
-    padding-top: 8.5rem; /* ajusta si ves que falta/sobra un poquito */
+    padding-top: 8.5rem; 
   }
-}
+} */
