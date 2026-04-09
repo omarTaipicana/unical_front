@@ -26,7 +26,7 @@ import SuperAdminProtectedRoute from "./routes/SuperAdminProtectedRoute";
 import UserEdit from "./pages/UserEdit";
 import { useEffect } from "react";
 import { Navigate } from "react-router-dom";
-import Cils from "./components/Cursos/Cils";
+import Cispnp from "./components/Cursos/Cispnp";
 
 const App = () => {
   const location = useLocation();
@@ -68,7 +68,7 @@ const App = () => {
         <Route path="/register_discente/:code" element={<RegistroAlumnos />} />
         <Route path="/register_pago/:code" element={<RegistroPagos />} />
 
-        <Route path="/cils" element={<Cils />} />
+        <Route path="/cispnp" element={<Cispnp />} />
         <Route path="/login" element={<Login />} />
 
         <Route element={<ProtectedRoutes />}>

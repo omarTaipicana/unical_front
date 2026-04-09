@@ -60,7 +60,7 @@
 }
 
 .registro_landing_title {
-  font-size: clamp(2.3rem, 4.8vw, 5rem);
+  font-size: clamp(2.3rem, 4.8vw, 3rem);
   line-height: 0.98;
   margin: 0 0 1rem;
   color: #ffffff;
@@ -378,7 +378,6 @@
 
 .registro_course_banner {
   position: relative;
-  min-height: 38rem;
   border-radius: 1.6rem;
   overflow: hidden;
   background-size: cover;
